@@ -2,7 +2,11 @@
     <div class="login_container">
         <div class="login_box">
             <!-- 登录表单 -->
-            <el-form label-width="0px" class="login_form" :rules="rules" :model="loginForm"
+            <el-form v-loading="loading"
+                     element-loading-text="正在登录..."
+                     element-loading-spinner="el-icon-loading"
+                     element-loading-background="rgba(0, 0, 0, 0.8)"
+                     label-width="0px" class="login_form"  :rules="rules" :model="loginForm"
                      ref="loginFormRef">
                 <!-- username -->
                 <el-form-item prop="username">
@@ -28,6 +32,7 @@
         name: "Login",
         data() {
             return {
+                loading: false,
                 /*登录的绑定对象*/
                 loginForm: {
                     username: '',
@@ -47,13 +52,43 @@
                 }
             }
         },
-        created() {},
+        //将enter键与登录关联起来
+        created() {
+            let _self = this;
+            document.onkeydown = function(e) {
+                let key = window.event.keyCode;
+                if (key === 13) {
+                    _self.login();
+                }
+            }
+        },
         methods: {
             login() {
-
+                this.$refs.loginFormRef.validate(valid => {
+                    if (valid) {
+                        //验证规则通过
+                        this.loading = true;
+                        this.$http.post('/user/login', this.loginForm).then(resp => {
+                            console.log(resp);
+                            if (resp && resp.status === 200) {
+                                //登录成功，保存用户名
+                                let _data = resp.data
+                                this.$store.commit('login', _data)
+                                //页面跳转
+                                this.$router.replace("/home");
+                            } else {
+                                //登录失败
+                                this.loading = false;
+                            }
+                        })
+                    } else {
+                        //验证失败，不做处理
+                        return false;
+                    }
+                });
             },
             reset() {
-
+                this.$refs.loginFormRef.resetFields();
             }
         }
     }
@@ -61,18 +96,20 @@
 
 <style scoped>
     .login_container {
-        background-color: dodgerblue;
-        height: 100%;
+        background-image: url("../assets/images/login.jpg");
+        width:100%;
+        height:100%;
+        position:fixed;
+        background-size:100% 100%;
     }
     .login_box {
-        width: 550px;
-        height: 300px;
+        width: 400px;
+        height: 400px;
         background-color: #fff;
-        border-radius: 10px;
         position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
+        left: 60%;
+        top: 25%;
+        border: 10px solid rgba(100,200,200,1);
     }
     .login_form {
         position: absolute;
