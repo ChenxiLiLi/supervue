@@ -9,13 +9,13 @@
                      label-width="0px" class="login_form"  :rules="rules" :model="loginForm"
                      ref="loginFormRef">
                 <!-- username -->
-                <el-form-item prop="username">
-                    <el-input size="normal" type="text" v-model="loginForm.username" auto-complete="off"
+                <el-form-item prop="adminName">
+                    <el-input size="normal" type="text" v-model="loginForm.adminName" auto-complete="off"
                               placeholder="请输入用户名" prefix-icon="el-icon-user"></el-input>
                 </el-form-item>
                 <!-- password -->
-                <el-form-item prop="password">
-                    <el-input size="normal" type="password" v-model="loginForm.password" auto-complete="off"
+                <el-form-item prop="adminPassword">
+                    <el-input size="normal" type="password" v-model="loginForm.adminPassword" auto-complete="off"
                               placeholder="请输入密码" prefix-icon="el-icon-lock"></el-input>
                 </el-form-item>
                 <el-form-item class="login_btn">
@@ -35,17 +35,17 @@
                 loading: false,
                 /*登录的绑定对象*/
                 loginForm: {
-                    username: '',
-                    password: '',
+                    adminName: '',
+                    adminPassword: '',
                 },
                 checked: true,
                 /*验证规则*/
                 rules: {
-                    username: [
+                    adminName: [
                         {required: true, message: '请输入用户名', trigger: 'blur'},
                         { min: 5, max: 10, message: '长度在 5 到 10 个字符', trigger: 'blur' }
                     ],
-                    password: [
+                    adminPassword: [
                         {required: true, message: '请输入密码', trigger: 'blur'},
                         { min: 6, max: 10, message: '长度在 6 到 10 个字符', trigger: 'blur' }
                     ],
