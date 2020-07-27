@@ -1,6 +1,17 @@
 /* 全局样式 */
+
+*{
+    box-sizing: content-box;
+}
 html, body, #app {
     height: 100%;
     margin: 0;
     padding: 0;
+}
+
+.height100p {
+    height: 100%;
+}
+#app {
+    width: 100%;
 }
