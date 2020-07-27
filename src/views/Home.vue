@@ -20,7 +20,7 @@
                 <span>销售管理</span>
               </template>
               <el-menu-item-group>
-                <el-menu-item index="2-1" @click="toSellOrder">销售查询</el-menu-item>
+                <el-menu-item index="2-1" @click="toSellOrder">销售</el-menu-item>
                 <el-menu-item index="2-2" @click="toSellRecord">销售历史</el-menu-item>
               </el-menu-item-group>
             </el-submenu>
@@ -46,7 +46,7 @@
     <div id="menu">
       <transition name="fade">
         <el-breadcrumb separator-class="el-icon-arrow-right" id="el-menu">
-          <el-breadcrumb-item>首页</el-breadcrumb-item>
+          <el-breadcrumb-item >首页</el-breadcrumb-item>
           <el-breadcrumb-item v-for="item of itemMenu" class="transitionMenu" :key="item.id">{{item}}</el-breadcrumb-item>
         </el-breadcrumb>
       </transition>
@@ -65,9 +65,7 @@
     data(){
 			return {
 				itemMenu:[
-					'活动管理',
-          '活动列表',
-          '活动详情'
+
         ],
 				transitionShow:true
       }
@@ -80,21 +78,21 @@
 				console.log(key, keyPath);
 			},
       toSellOrder(){
-				this.$router.push('sellOrder')
+				this.$router.replace('/home/sellOrder')
         this.itemMenu = []
-        this.itemMenu = this.itemMenu.concat(['销售管理','销售历史'])
+        this.itemMenu = this.itemMenu.concat(['销售管理','销售'])
         this.transitionShow = false
       },
 			toSellRecord(){
-				this.$router.push('sellRecord')
+				this.$router.replace('/home/sellRecord')
 				this.itemMenu = []
-				this.itemMenu = this.itemMenu.concat(['销售管理','销售查询'])
+				this.itemMenu = this.itemMenu.concat(['销售管理','销售记录'])
       },
 			toAddGoods(){
-				this.$router.push('addGoods')
+				this.$router.replace('/home/addGoods')
       },
       toGoodsDetails(){
-				this.$router.push('goodsDetails')
+				this.$router.replace('/home/goodsDetails')
       }
 		}
 	}

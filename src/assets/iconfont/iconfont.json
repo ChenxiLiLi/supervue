@@ -1,0 +1,107 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "172696",
+      "name": "收藏",
+      "font_class": "shoucang",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "253567",
+      "name": "手机",
+      "font_class": "shouji",
+      "unicode": "e6c7",
+      "unicode_decimal": 59079
+    },
+    {
+      "icon_id": "670205",
+      "name": "YDUI-正确(空心)",
+      "font_class": "yduizhengquekongxin",
+      "unicode": "e6a8",
+      "unicode_decimal": 59048
+    },
+    {
+      "icon_id": "839006",
+      "name": "加",
+      "font_class": "jia",
+      "unicode": "e632",
+      "unicode_decimal": 58930
+    },
+    {
+      "icon_id": "2551777",
+      "name": "聊天",
+      "font_class": "liaotian",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
+      "icon_id": "2678643",
+      "name": "文件",
+      "font_class": "wenjian",
+      "unicode": "e662",
+      "unicode_decimal": 58978
+    },
+    {
+      "icon_id": "7299460",
+      "name": "空心 勾",
+      "font_class": "kongxingou",
+      "unicode": "e789",
+      "unicode_decimal": 59273
+    },
+    {
+      "icon_id": "7738015",
+      "name": "用户",
+      "font_class": "yonghu",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "7949518",
+      "name": "更多",
+      "font_class": "gengduo",
+      "unicode": "e696",
+      "unicode_decimal": 59030
+    },
+    {
+      "icon_id": "10246032",
+      "name": "加",
+      "font_class": "jia1",
+      "unicode": "e771",
+      "unicode_decimal": 59249
+    },
+    {
+      "icon_id": "10300694",
+      "name": "减 (1)111",
+      "font_class": "jian",
+      "unicode": "e652",
+      "unicode_decimal": 58962
+    },
+    {
+      "icon_id": "10664706",
+      "name": "搜索 search",
+      "font_class": "search",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "11372659",
+      "name": "更多",
+      "font_class": "gengduo1",
+      "unicode": "e8af",
+      "unicode_decimal": 59567
+    },
+    {
+      "icon_id": "15821666",
+      "name": "看一看",
+      "font_class": "kanyikan",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    }
+  ]
+}

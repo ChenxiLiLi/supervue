@@ -5,6 +5,7 @@ import './plugins/element.js'
 import store from './store'
 import 'element-ui/lib/theme-chalk/index.css'
 import './assets/css/global.css'
+import './assets/iconfont/iconfont.css'
 import api from './plugins/api'
 
 Vue.config.productionTip = false
