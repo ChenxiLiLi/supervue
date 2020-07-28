@@ -1,5 +1,5 @@
 <template>
-    <div id="purchaseRecord">
+    <div id="goodsDetails">
         <div id="search">
             <div id="searchBox">
                 搜索栏
@@ -11,22 +11,22 @@
 
 <script>
     export default {
-        name: "purchaseRecord"
+        name: "goodsDetails"
     }
 </script>
 
 <style scoped>
-    #purchaseRecord {
+    #goodsDetails {
         height: 100%;
         width: 100%;
     }
 
-    #purchaseRecord #search {
+    #goodsDetails #search {
         width: 100%;
         height: 15%;
     }
 
-    #purchaseRecord #search #searchBox {
+    #goodsDetails #search #searchBox {
         width: 80%;
         height: 100%;
         margin: 0 auto;
@@ -34,7 +34,7 @@
         text-align: center;
     }
 
-    #purchaseRecord #table {
+    #goodsDetails #table {
         width: 100%;
         height: 85%;
         text-align: center;

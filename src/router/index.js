@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../views/Login'
-
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css'
 
@@ -17,6 +16,10 @@ const routes = [
 		component: () => import('../views/Home'),
 		children:[
 			{
+				path:'staffsInfo',
+				component: () => import('../component/staff/staffsInfo')
+			},
+			{
 				path:'sellRecord',
 				component: () => import('../component/sell/sellRecord')
 			},
@@ -25,12 +28,16 @@ const routes = [
 				component: () => import('../component/sell/sellOrder')
 			},
 			{
-				path:'addGoods',
-				component: () => import('../component/goods/addGoods')
+				path:'purchaseOrder',
+				component: () => import('../component/purchase/purchaseOrder')
+			},
+			{
+				path:'purchaseRecord',
+				component: () => import('../component/purchase/purchaseRecord')
 			},
 			{
 				path:'goodsDetails',
-				component: () => import('../component/goods/goodsDetails')
+				component: () => import('../component/stock/goodsDetails')
 			}
 		]
 	}
