@@ -37,22 +37,8 @@ instance.interceptors.response.use(resp => {
     }
     return resp.data;
 }, error => {
-    console.log(error.response)
-    if (error.response.status === 504 || error.response.status === 404) {
-        Message.error({message: '服务器去度假了,请稍后重试!'})
-    } else if (error.response.status === 403) {
-        Message.error({message: '权限不足，请联系管理员'})
-    } else if (error.response.status === 401) {
-        Message.error({message: '您尚未登录，请先登录'})
-        //转到登录页
-        router.replace('/login');
-    } else {
-        //其余错误，直接给出错误提示
-        if (error.response.data.msg) {
-            Message.error({message: error.response.data.msg})
-        } else {
-            Message.error({message: '未知错误!'})
-        }
+    if (error.response.data.msg) {
+        Message.error({message: error.response.data.msg})
     }
 })
 export default instance;

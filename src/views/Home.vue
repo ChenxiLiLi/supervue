@@ -42,7 +42,7 @@
                         <el-submenu index="4">
                             <template slot="title">
                                 <i class="fa fa-signal" style="width: 25px"></i>
-                                <span>库存管理</span>
+                                <span>商品管理</span>
                             </template>
                             <el-menu-item-group style="padding-left: 30px">
                                 <el-menu-item index="4-1" @click="toGoodsDetails">商品库存</el-menu-item>
@@ -115,7 +115,7 @@
             toGoodsDetails() {
                 this.$router.replace('/home/goodsDetails')
                 this.itemMenu = []
-                this.itemMenu = this.itemMenu.concat(['库存管理', '商品库存'])
+                this.itemMenu = this.itemMenu.concat(['商品管理', '商品库存'])
             },
             toBasicInfo() {
                 this.$router.replace('/home/staffsInfo')

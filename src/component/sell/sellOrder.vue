@@ -2,12 +2,8 @@
     <div id="sellOrder">
         <div id="search">
             <div id="searchBox">
-                <el-input v-model="searchItem.id" style="width: 25%;margin-right: 2%;margin-top: 30px"
+                <el-input v-model="searchItem.id" style="width: 25%;margin-left: 25%;margin-right: 2%;margin-top: 30px"
                           placeholder="搜索商品id"></el-input>
-                <el-input v-model="searchItem.goodsName" style="width: 25%;margin-right: 2%"
-                          placeholder="搜索商品名"></el-input>
-                <el-input v-model="searchItem.price" style="width: 25%;margin-right: 2%"
-                          placeholder="搜索商品价格"></el-input>
                 <el-button type="success" @click="searchMessage">搜索</el-button>
                 <el-button type="success" @click="reset">重置</el-button>
             </div>
@@ -16,7 +12,7 @@
 
             <div id="tableChild">
                 <el-table
-                        :data="tableData"
+                        :data="tableData" stripe size="mini" highlight-current-row
                         border
                         max-height="380"
                 >
@@ -116,7 +112,7 @@
         methods: {
             searchMessage() {
                 let id = this.searchItem.id
-                this.tableData = this.tableData.filter(function (item) {
+                this.tableData = this.tableAllData.filter(function (item) {
                     console.log(id)
                     console.log(item)
                     console.log(item.id)
@@ -134,6 +130,11 @@
                     })
                 } else {
                     row.num--
+                    this.tableAllData.forEach(function (item, index) {
+                        if (item.gdsId == row.gdsId) {
+                            item.num = row.num
+                        }
+                    })
                 }
             },
             addGoods(row) {
@@ -144,68 +145,105 @@
                     })
                 } else {
                     row.num++
+                    this.tableAllData.forEach(function (item, index) {
+                        if (item.gdsId == row.gdsId)
+                            item.num = row.num
+                    })
                 }
+                console.log(this.tableAllData)
             },
             handleSizeChange(val) {
                 console.log(`每页 ${val} 条`);
                 this.pageSize = val
                 this.getGoodsMsg()
             },
-            handleCurrentChange(val) {
+            async handleCurrentChange(val) {
                 console.log(`当前页: ${val}`);
-                this.page = val
-                this.getGoodsMsg()
+                await this.getGoodsMsg(val, this.pageSize)
+                console.log(this.tableAllData)
+                this.tableData = this.tableAllData.filter((obj) => {
+                    for (let item of this.tableData) {
+                        if (obj.gdsId == item.gdsId) {
+                            return obj
+                        }
+                    }
+                })
             },
-            getGoodsMsg() {
-                this.$http('/sell/goods/' + this.page + '/' + this.pageSize).then(resp => {
+            async getGoodsMsg(currentPage = this.page, pageSize = this.pageSize) {
+                await this.$http('/sell/goods/' + currentPage + '/' + pageSize).then(resp => {
                     console.log(resp)
-                    //初始化总条数  this.goodsTotal  未实现
-
-                    for (let item of resp) {
+                    for (let item of resp.data.data) {
                         item.num = 0
                     }
                     this.tableData = []
-                    this.tableData = this.tableData.concat(resp)
+                    this.tableData = this.tableData.concat(resp.data.data)
+                    this.goodsTotal = resp.data.recordsNum
+                    this.pageSize = resp.data.pageSize
                 })
             },
             getAllGoodsMsg() {
-                this.$http('/sell/goods/' + 1 + '/' + 10000).then(resp => {
+                this.$http('/sell/goods/1/1000').then(resp => {
                     console.log(resp)
-                    //初始化总条数  this.goodsTotal  未实现
-
-                    for (let item of resp) {
+                    for (let item of resp.data.data) {
                         item.num = 0
                     }
                     this.tableAllData = []
-                    this.tableAllData = this.tableData.concat(resp)
+                    this.tableAllData = resp.data.data
                 })
             },
-            commitOrder() {
-                this.$http.post('/sell/addOrder/1', JSON.stringify({
-                    sellItem: [
-                        {
-                            sellId: 1,
-                            gdsId: 1,
-                            price: '12',
-                            amount: 123
-                        }, {
-                            sellId: 2,
-                            gdsId: 2,
-                            price: '12',
-                            amount: 123
+            async commitOrder() {
+                this.$http.defaults.headers.post['Content-Type'] = 'application/json';
+                let sellItem = [
+                    {
+                        sellId: "null",
+                        gdsId: 14,
+                        price: 4,
+                        amount: 2
+                    }, {
+                        sellId: "null",
+                        gdsId: 15,
+                        price: 4,
+                        amount: 2
+                    }
+                ]
+                sellItem = []
+                this.tableAllData.forEach((item, index) => {
+                    if (item.num != 0) {
+                        sellItem = sellItem.concat({
+                            sellId: "null",
+                            gdsId: item.gdsId,
+                            price: item.price,
+                            amount: item.num
+                        })
+                        console.log(sellItem)
+                    }
+                })
+                await this.$http.post('/sell/addOrder/1', JSON.stringify(sellItem)).then(resp => {
+                    this.$message('添加成功')
+                })
+                await this.getGoodsMsg()
+                await this.getAllGoodsMsg()
+            },
+            async reset() {
+                this.searchItem = {
+                    id: null,
+                    goodsName: null,
+                    price: null
+                }
+                await this.getGoodsMsg()
+                console.log(this.tableAllData)
+                this.tableData = this.tableAllData.filter((obj) => {
+                    for (let item of this.tableData) {
+                        if (obj.gdsId == item.gdsId) {
+                            return obj
                         }
-                    ]
-                })).then(resp => {
-                    console.log('success')
+                    }
                 })
-
-            },
-            reset() {
-                this.tableData = this.tableData1
             }
         },
         mounted() {
             this.getGoodsMsg()
+            this.getAllGoodsMsg()
         }
     }
 </script>

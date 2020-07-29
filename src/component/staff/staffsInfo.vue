@@ -9,7 +9,7 @@
                     </el-input>
                 </el-col>
                 <el-col :span="4">
-                    <el-button type="primary" plain icon="el-icon-search"
+                    <el-button type="success" icon="el-icon-search"
                                style="padding: 10px 20px; margin-top: 2px" @click="searchStaff">
                         搜索
                     </el-button>
@@ -40,25 +40,22 @@
                                  align="left" width="85">
                 </el-table-column>
                 <!-- 功能列 -->
-                <el-table-column fixed="right" width="180"
+                <el-table-column fixed="right" width="100"
                                  label="操作">
                     <template slot-scope="scope">
-                        <el-button size="mini"
-                                   @click="handleEdit(scope.$index, scope.row)">编辑
-                        </el-button>
-                        <el-button size="mini" type="danger"
-                                   @click="handleDelete(scope.$index, scope.row)">删除
+                        <el-button size="mini" type="success"
+                                   @click="handleEdit(scope.$index, scope.row,scope.name)">编辑
                         </el-button>
                     </template>
                 </el-table-column>
             </el-table>
             <!-- 分页组件 -->
             <div class="pagination">
-                <el-button type="danger" size="small">批量删除</el-button>
+                <el-button type="success" size="small">批量删除</el-button>
                 <el-pagination style="text-align: right" background
                                layout="total, prev, pager, next, jumper"
                                @current-change="getPage"
-                               :page-size="7"
+                               :page-size="size"
                                :total="total">
                 </el-pagination>
             </div>
@@ -68,13 +65,14 @@
 
 <script>
     export default {
-        name: "userManage",
+        name: "staffsInfo",
         data(){
             return {
-                keyWord: '',
                 staffData: [],
                 total: null,
-                staffName: null
+                staffName: null,
+				page: 1,
+				size: 5
             }
         },
         //初始化第一页员工数据
@@ -87,10 +85,9 @@
                 }
             }
             this.$http.get('/staff/basicInfo',{
-                    //使用params,会以bserURL/staff/basicInfo?page=1&size=7调用后台接口
                     params: {
                         page: 1,
-                        size: 8,
+                        size: 5,
                         search: ''
                     }
                 }
@@ -98,34 +95,31 @@
                 console.log(resp)
                 if (resp) {
                     //获取员工数据
-                    this.staffData = resp.data;
+                    this.staffData = resp.data.data;
                     //获取数据总条数
-                    this.total = resp.recordsNum;
+                    this.total = resp.data.recordsNum;
                 } else {
                     this.$message.error("资料获取失败")
                 }
             })
         },
         methods: {
-            handleEdit(index, row) {
-                console.log(index, row);
-            },
-            handleDelete(index, row) {
-                console.log(index, row);
+			handleEdit(index, row, name) {
+                alert("请求编辑员工的个人信息")
             },
             //根据页码获取员工资料
             getPage(currentPage) {
                 this.$http.get('/staff/basicInfo',{
                     params: {
                         page: currentPage,
-                        size: 7,
+                        size: 5,
                         search: this.staffName
                     }
                 }).then(resp => {
                     if (resp) {
                         //获取数据成功
-                        this.staffData = resp.data;
-                        this.total = resp.recordsNum;
+                        this.staffData = resp.data.data;
+                        this.total = resp.data.recordsNum;
                     } else {
                         this.$message.error("资料获取失败")
                     }
@@ -136,14 +130,15 @@
                 this.$http.get('/staff/basicInfo',{
                     params: {
                         page: 1,
-                        size: 7,
+                        size: 5,
                         search: this.staffName
                     }
                 }).then(resp => {
+					console.log(resp)
                     if (resp) {
                         //获取数据成功
-                        this.empsData = resp.data;
-                        this.total = resp.recordsNum;
+                        this.staffData = resp.data.data;
+                        this.total = resp.data.recordsNum;
                     } else {
                         this.$message.error("资料获取失败")
                     }
