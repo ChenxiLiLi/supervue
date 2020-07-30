@@ -66,6 +66,9 @@
                     </el-breadcrumb-item>
                 </el-breadcrumb>
             </transition>
+            <div id="systemuser">
+                <span style="font-size: 18px">当前登录用户：{{username}}</span>
+            </div>
         </div>
         <div id="div2">
             <transition name="fade">
@@ -81,8 +84,12 @@
         data() {
             return {
                 itemMenu: [],
-                transitionShow: true
+                transitionShow: true,
+                username: ''
             }
+        },
+        created() {
+            this.username = localStorage.getItem('user')
         },
         methods: {
             handleOpen(key, keyPath) {
@@ -157,14 +164,11 @@
     .transitionMenu {
         transition: 2s;
     }
-
-    .fade-enter-active, .fade-leave-active {
-        transition: opacity .5s;
+    #systemuser {
+        margin-top: 30px;
+        margin-left: 83%;
+        color: red;
     }
 
-    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */
-    {
-        opacity: 0;
-    }
 </style>
 

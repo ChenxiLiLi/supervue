@@ -43,7 +43,7 @@
                 <el-table-column fixed="right" width="100"
                                  label="操作">
                     <template slot-scope="scope">
-                        <el-button size="mini" type="success"
+                        <el-button size="mini" type="success" disabled
                                    @click="handleEdit(scope.$index, scope.row,scope.name)">编辑
                         </el-button>
                     </template>
@@ -51,8 +51,8 @@
             </el-table>
             <!-- 分页组件 -->
             <div class="pagination">
-                <el-button type="success" size="small">批量删除</el-button>
-                <el-pagination style="text-align: right" background
+                <!--<el-button type="success" size="small">批量删除</el-button>-->
+                <el-pagination style="text-align: center" background
                                layout="total, prev, pager, next, jumper"
                                @current-change="getPage"
                                :page-size="size"
@@ -153,10 +153,5 @@
         font-size: 12px;
         width: 100%;
         margin-bottom: 10px;
-    }
-    .pagination {
-        display: flex;
-        justify-content: space-between;
-        font-weight: 600;
     }
 </style>
