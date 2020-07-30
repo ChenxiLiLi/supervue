@@ -57,10 +57,10 @@
     <!--        弹出框-->
     <el-dialog title="商品订单信息" :visible.sync="showVisible">
       <el-table :data="recordTable">
-        <el-table-column property="sellId" label="销售id"></el-table-column>
-        <el-table-column property="gdsId" label="商品id"></el-table-column>
-        <el-table-column property="price" label="价格"></el-table-column>
-        <el-table-column property="amount" label="amount"></el-table-column>
+        <el-table-column property="sellId" label="销售单号"></el-table-column>
+        <el-table-column property="gdsId" label="商品编号"></el-table-column>
+        <el-table-column property="price" label="总价格"></el-table-column>
+        <el-table-column property="amount" label="商品数量"></el-table-column>
       </el-table>
     </el-dialog>
   </div>

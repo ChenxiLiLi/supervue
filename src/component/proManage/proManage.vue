@@ -9,8 +9,8 @@
         >
           <el-table-column
               fixed
-              prop="spID"
-              label="供货商id"
+              prop="spId"
+              label="供货商编号"
               align="center"
               min-width="80">
           </el-table-column>
@@ -22,13 +22,13 @@
           </el-table-column>
           <el-table-column
               prop="location"
-              label="位置"
+              label="供货商地址"
               align="center"
               min-width="100">
           </el-table-column>
           <el-table-column
               prop="spTel"
-              label="spTel"
+              label="联系电话"
               align="center"
               min-width="100">
           </el-table-column>

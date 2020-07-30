@@ -9,52 +9,58 @@
                             @open="handleOpen"
                             @close="handleClose" unique-opened
                             background-color="#545c64"
-                            text-color="#fff" default-active="2">
-                        <el-submenu index="1">
+                            text-color="#fff" default-active="1">
+						<el-menu-item index="1" @click="toWelcome">
+							<template slot="title">
+								<i class="fa fa-users" style="width: 25px"></i>
+								<span>首页</span>
+							</template>
+                        </el-menu-item>
+                        <el-submenu index="2">
                             <template slot="title">
                                 <i class="fa fa-user-circle-o" style="width: 25px"></i>
                                 <span slot="title">员工管理</span>
                             </template>
                             <el-menu-item-group style="padding-left: 30px">
-                                <el-menu-item index="1-1" @click="toBasicInfo">基本信息</el-menu-item>
+                                <el-menu-item index="2-1" @click="toBasicInfo">基本信息</el-menu-item>
                             </el-menu-item-group>
                         </el-submenu>
-                        <el-submenu index="2">
+                        <el-submenu index="3">
                             <template slot="title">
                                 <i class="fa fa-shopping-cart" style="width: 25px"></i>
                                 <span>销售管理</span>
                             </template>
                             <el-menu-item-group style="padding-left: 30px">
-                                <el-menu-item index="2-1" @click="toSellOrder">销售</el-menu-item>
-                                <el-menu-item index="2-2" @click="toSellRecord">销售历史</el-menu-item>
+                                <el-menu-item index="3-1" @click="toSellOrder">销售</el-menu-item>
+                                <el-menu-item index="3-2" @click="toSellRecord">销售历史</el-menu-item>
                             </el-menu-item-group>
                         </el-submenu>
-                        <el-submenu index="3">
+                        <el-submenu index="4">
                             <template slot="title">
                                 <i class="fa fa-sign-in" style="width: 25px"></i>
                                 <span>进货管理</span>
                             </template>
                             <el-menu-item-group style="padding-left: 30px">
-                                <el-menu-item index="3-1" @click="toPurchaseOrder">进货</el-menu-item>
-                                <el-menu-item index="3-2" @click="toPurchaseRecord">进货历史</el-menu-item>
+                                <el-menu-item index="4-1" @click="toPurchaseOrder">进货</el-menu-item>
+                                <el-menu-item index="4-2" @click="toPurchaseRecord">进货历史</el-menu-item>
                             </el-menu-item-group>
                         </el-submenu>
-                        <el-submenu index="4">
+                        <el-submenu index="5">
                             <template slot="title">
                                 <i class="fa fa-signal" style="width: 25px"></i>
                                 <span>商品管理</span>
                             </template>
                             <el-menu-item-group style="padding-left: 30px">
-                                <el-menu-item index="4-1" @click="toGoodsDetails">商品库存</el-menu-item>
+                                <el-menu-item index="5-1" @click="toGoodsDetails">商品库存</el-menu-item>
                             </el-menu-item-group>
                         </el-submenu>
-                        <el-submenu index="5">
+                        <el-submenu index="6">
                             <template slot="title">
                                 <i class="fa fa-users" style="width: 25px"></i>
                                 <span>供货商管理</span>
                             </template>
                             <el-menu-item-group style="padding-left: 30px">
-                                <el-menu-item index="5-1" @click="toSupplierManage">供应商列表</el-menu-item>
+                                <el-menu-item index="6-1" @click="toSupplierManage">供应商列表</el-menu-item>
                             </el-menu-item-group>
                         </el-submenu>
                     </el-menu>
@@ -97,8 +103,8 @@
             handleClose(key, keyPath) {
                 console.log(key, keyPath);
             },
-            toGoodsManage(){
-              this.$router.replace('/home/proManage')
+            toWelcome(){
+				this.$router.replace('/home/welcome')
             },
             toSellOrder() {
                 this.$router.replace('/home/sellOrder')

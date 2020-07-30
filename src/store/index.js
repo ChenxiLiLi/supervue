@@ -21,9 +21,9 @@ export default new Vuex.Store({
       window.localStorage.removeItem('token')
       window.localStorage.removeItem('user')
     },
-    reset() {
-      this.token = ''
-      this.username = ''
+    reset(state) {
+      state.token = ''
+      state.username = ''
     }
   },
   actions: {

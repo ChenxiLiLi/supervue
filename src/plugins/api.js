@@ -16,10 +16,9 @@ instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlenco
 //请求拦截器
 instance.interceptors.request.use(config => {
     //发送请求前判断是否存在token
-    if(store.state.token) {
-		//存在token,将token加到请求头上，用于后台判断登录情况
-		config.headers.Authorization = store.state.token;
-	}
+	const _token = store.state.token;
+	//存在token,将token加到请求头上，用于后台判断登录情况
+	_token && (config.headers.Authorization = _token);
     return config;
 }, error => {
     Message.error({message: '请求超时,请稍后重试!'});

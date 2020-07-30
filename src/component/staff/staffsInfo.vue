@@ -8,10 +8,14 @@
                     <el-input v-model="staffName" placeholder="请输入员工名搜索员工" prefix-icon="el-icon-search">
                     </el-input>
                 </el-col>
-                <el-col :span="4">
+                <el-col :span="6">
                     <el-button type="success" icon="el-icon-search"
                                style="padding: 10px 20px; margin-top: 2px" @click="searchStaff">
                         搜索
+                    </el-button>
+					 <el-button type="success"
+                               style="padding: 10px 20px; margin-top: 2px" @click="reset">
+                        重置
                     </el-button>
                 </el-col>
             </el-row>
@@ -122,7 +126,8 @@
                         this.staffData = resp.data.data;
                         this.total = resp.data.recordsNum;
                     } else {
-                        this.$message.error("资料获取失败")
+						this.staffName = null;
+                        return;
                     }
                 })
             },
@@ -137,14 +142,19 @@
                 }).then(resp => {
 					console.log(resp)
                     if (resp) {
-                        //获取数据成功
+						//获取数据成功
                         this.staffData = resp.data.data;
                         this.total = resp.data.recordsNum;
                     } else {
-                        this.$message.error("资料获取失败")
-                    }
+						this.staffName = null;
+						return;
+					}
                 })
-            }
+            },
+			reset() {
+				this.staffName = null;
+				this.searchStaff();
+			}
         }
     }
 </script>

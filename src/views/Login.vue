@@ -2,7 +2,7 @@
     <div class="login_container">
         <div class="login_box">
             <div class="welcomeFont">
-                <span style="font-size: 24px">宜家超市系统</span>
+                <span style="font-size: 26px">进存销超市系统</span>
             </div>
             <!-- 登录表单 -->
             <el-form v-loading="loading"
@@ -131,7 +131,7 @@
         padding: 12px 25px;
     }
     .welcomeFont {
-        margin-left: 120px;
+        margin-left: 105px;
         margin-top: 60px;
         color: #545c64;
     }
