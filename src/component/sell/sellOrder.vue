@@ -42,10 +42,14 @@
                             min-width="100">
                     </el-table-column>
                     <el-table-column
-                            prop="num"
                             label="购买数量"
                             align="center"
                             min-width="100">
+                        <template slot-scope="scope">
+                            <el-input type="input" style="width: 100px"
+                                      @input="watchNum(scope.row)"
+                                      v-model="scope.row.num"></el-input>
+                        </template>
                     </el-table-column>
                     <el-table-column
                             label="操作"
@@ -123,7 +127,7 @@
             },
             reduceGoods(row) {
                 console.log(row);
-                if (row.num == 0) {
+                if (row.num <= 0) {
                     this.$message({
                         message: '数量不能为负数',
                         type: 'warning'
@@ -138,7 +142,7 @@
                 }
             },
             addGoods(row) {
-                if (row.num == row.amount) {
+                if (row.num >= row.amount) {
                     this.$message({
                         message: '数量不能超过最大存货量',
                         type: 'warning'
@@ -239,6 +243,15 @@
                         }
                     }
                 })
+            },
+            watchNum(row){
+                console.log('keyDowm')
+                if (row.num >= row.amount){
+                    row.num = row.amount
+                }
+                if (row.num < 0) {
+                    row.num = 0
+                }
             }
         },
         mounted() {

@@ -1,6 +1,10 @@
 <template>
     <div class="login_container">
         <div class="login_box">
+			<div class="welcomeFont">
+				<span style="font-size:26px">Logining to</span><br>
+				<span style="font-size:26px; margin-left:40px;">Supermarket System</span>
+			</div>
             <!-- 登录表单 -->
             <el-form v-loading="loading"
                      element-loading-text="正在登录..."
@@ -128,4 +132,9 @@
         margin-inline-start: 10px;
         padding: 12px 25px;
     }
+	.welcomeFont{
+		color: rgba(100,200,200,1);
+		margin-top: 60px;
+		margin-left: 60px;
+	}
 </style>

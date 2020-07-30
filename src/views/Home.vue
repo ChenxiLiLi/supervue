@@ -51,7 +51,7 @@
                         <el-menu-item index="5">
                             <template slot="title">
                                 <i class="fa fa-users" style="width: 25px"></i>
-                                <span>供货商管理</span>
+                                <span @click="toGoodsManage">供货商管理</span>
                             </template>
                         </el-menu-item>
                     </el-menu>
@@ -66,9 +66,9 @@
                     </el-breadcrumb-item>
                 </el-breadcrumb>
             </transition>
-            <div id="systemuser">
-                <span style="font-size: 18px">当前登录用户：{{username}}</span>
-            </div>
+            <el-button class="btn100" @click="returnLogin">
+                退出登录
+            </el-button>
         </div>
         <div id="div2">
             <transition name="fade">
@@ -84,12 +84,8 @@
         data() {
             return {
                 itemMenu: [],
-                transitionShow: true,
-                username: ''
+                transitionShow: true
             }
-        },
-        created() {
-            this.username = localStorage.getItem('user')
         },
         methods: {
             handleOpen(key, keyPath) {
@@ -97,6 +93,9 @@
             },
             handleClose(key, keyPath) {
                 console.log(key, keyPath);
+            },
+            toGoodsManage(){
+              this.$router.replace('/home/proManage')
             },
             toSellOrder() {
                 this.$router.replace('/home/sellOrder')
@@ -128,6 +127,12 @@
                 this.$router.replace('/home/staffsInfo')
                 this.itemMenu = []
                 this.itemMenu = this.itemMenu.concat(['员工管理', '基本信息'])
+            },
+            returnLogin(){
+                localStorage.removeItem('token')
+                localStorage.removeItem('user')
+                this.$store.commit('reset');
+                this.$router.replace('/login')
             }
         }
     }
@@ -164,11 +169,20 @@
     .transitionMenu {
         transition: 2s;
     }
-    #systemuser {
-        margin-top: 30px;
-        margin-left: 83%;
-        color: red;
+
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .5s;
     }
 
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */
+    {
+        opacity: 0;
+    }
+
+    .btn100 {
+        position: absolute;
+        bottom: 0;
+        right: 30px;
+    }
 </style>
 

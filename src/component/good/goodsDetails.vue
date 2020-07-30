@@ -2,7 +2,7 @@
     <div id="goodsDetails">
        
 		<el-button type="success" style="margin-top:30px;margin-left:970px" 
-				@click="exportReport">导出报表</el-button>
+				@click="exportReport" disabled>导出报表</el-button>
         
         <div id="table" style="margin-top:25px;width:95%;margin-left:25px">
             <div id="tableChild">

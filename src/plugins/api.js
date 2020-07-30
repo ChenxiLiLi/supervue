@@ -4,6 +4,7 @@
 import axios from 'axios'
 import {Message} from "element-ui";
 import router from "../router/index";
+import store from '../store/index'
 //创建axios实例
 const instance = axios.create({
     timeout: 1000*12,
@@ -15,9 +16,10 @@ instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlenco
 //请求拦截器
 instance.interceptors.request.use(config => {
     //发送请求前判断是否存在token
-    const token = localStorage.getItem('token');
-    //存在token,将token加到请求头上，用于后台判断登录情况
-    token && (config.headers.Authorization = token);
+    if(store.state.token) {
+		//存在token,将token加到请求头上，用于后台判断登录情况
+		config.headers.Authorization = store.state.token;
+	}
     return config;
 }, error => {
     Message.error({message: '请求超时,请稍后重试!'});
@@ -37,8 +39,6 @@ instance.interceptors.response.use(resp => {
     }
     return resp.data;
 }, error => {
-    if (error.response.data.msg) {
-        Message.error({message: error.response.data.msg})
-    }
+    return Promise.reject(error);
 })
 export default instance;

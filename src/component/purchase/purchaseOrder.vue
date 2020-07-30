@@ -4,24 +4,24 @@
 			<div style="margin: 20px;"></div>
 			<el-form :label-position="labelPosition" :rules="rules" label-width="100px" :model="purchaseOrder" ref="purchaseOrderRef">
 				<el-form-item label="商品编号" prop="goodsId">
-					<el-input v-model="purchaseOrder.goodsId" placeholder="填写商品的数字编号"></el-input>
+					<el-input v-model="purchaseOrder.goodsId"
+										@input="getGoodsName(purchaseOrder.goodsId)"
+										placeholder="填写商品的数字编号"></el-input>
 				</el-form-item>
 				<el-form-item label="商品名称" prop="goodsName">
-					<el-input v-model="purchaseOrder.goodsName" placeholder="请填写商品的完整名称"></el-input>
+					<el-input v-model="purchaseOrder.goodsName"
+										:disabled="true"
+										placeholder="请填写商品的完整名称"></el-input>
 				</el-form-item>
 				<el-form-item label="供应商编号" prop="supplierId">
-					<el-select v-model="purchaseOrder.supplierId" placeholder="请选择供应商编号" clearable>
-					  <el-option v-for="item in suppIdList" :key="item.id"
-						:label="item.id" :value="item.id">
-					  </el-option>
-					</el-select>
+					<el-input v-model="purchaseOrder.supplierId"
+										@input="getProductName()"
+										placeholder="填写供应商的数字编号"></el-input>
 				</el-form-item>
 				<el-form-item label="供应商名称" prop="supplierName">
-					<el-select v-model="purchaseOrder.supplierName" placeholder="请选择供应商" clearable>
-					  <el-option v-for="item in suppNameList" :key="item.id"
-						:label="item.name" :value="item.id">
-					  </el-option>
-					</el-select>
+					<el-input v-model="purchaseOrder.supplierName"
+										:disabled="true"
+										placeholder="供应商名称"></el-input>
 				</el-form-item>
 				<el-form-item label="进货单价/元" prop="price">
 					<el-input v-model="purchaseOrder.price" placeholder="请填写进货单价" style="width:218px;">
@@ -31,7 +31,7 @@
 					<el-input-number v-model="purchaseOrder.amount" controls-position="right" :min="10" :max="100">
 					</el-input-number>
 				</el-form-item>
-				
+
 				<el-row :gutter="15" style="margin-bottom: 10px">
 					<el-col :span="10">
 						<el-form-item label="员工编号" prop="staffId">
@@ -46,7 +46,7 @@
 						</el-button>
 						<el-button type="danger" @click="reset">
 							重置输入
-						</el-button>	
+						</el-button>
 					</el-col>
 				</el-row>
 			</el-form>
@@ -130,21 +130,29 @@
 					}
 				})
 			},
+			getGoodsName(id){
+				this.$http('/goods/search/'+id).then(resp => {
+					if (resp.data != null)
+						this.purchaseOrder.goodsName = resp.data.gdsName;
+					else
+						this.purchaseOrder.goodsName = '商品不存在'
+				})
+			},
+			getProductName(){
+				console.log(this.purchaseOrder)
+				 let id = this.purchaseOrder.supplierId
+				this.$http('/supplier/search/'+id).then(resp => {
+					if (resp != undefined)
+						this.purchaseOrder.supplierName = resp.data.spName;
+					else
+						this.purchaseOrder.supplierName = '供应商不存在'
+				})
+			},
 			reset() {
                 location.reload();
             }
 		},
 		created() {
-			this.$http.get('/supplier/getSupplierIdName').then(resp => {
-				console.log(resp)
-                if (resp) {
-                    //获取供应商列表<id, String>
-                    this.suppNameList = resp;
-					this.suppIdList = resp;
-                } else {
-                    this.$message.error("供应商列表获取失败")
-                }
-			})
 		}
 	}
 </script>
@@ -154,7 +162,7 @@
 		margin-top: 30px;
 		width: 75%;
 		height: 480px;
-		margin-left: 90px;		
+		margin-left: 90px;
 	}
 	.el-form-item {
 		font-weight: 600;

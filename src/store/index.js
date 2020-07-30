@@ -20,6 +20,10 @@ export default new Vuex.Store({
     logout(state) {
       window.localStorage.removeItem('token')
       window.localStorage.removeItem('user')
+    },
+    reset() {
+      this.token = ''
+      this.username = ''
     }
   },
   actions: {
