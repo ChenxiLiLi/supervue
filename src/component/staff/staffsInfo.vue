@@ -16,30 +16,31 @@
                 </el-col>
             </el-row>
             <!-- 信息展示表格 -->
-            <el-table :data="staffData" border stripe size="mini" highlight-current-row>
+            <el-table :data="staffData" border stripe size="mini"
+                      highlight-current-row>
                 <!-- 员工对象的属性列 -->
                 <el-table-column prop="name" fixed align="left"
-                                 label="姓名" width="90">
+                                 label="姓名" width="100">
                 </el-table-column>
                 <el-table-column prop="gender" label="性别"
                                  align="left" width="85">
                 </el-table-column>
                 <el-table-column prop="idCard" label="身份证"
-                                 align="left" width="150">
+                                 align="left" width="200">
                 </el-table-column>
                 <el-table-column prop="phone" label="电话号码"
-                                 align="left" width="130">
+                                 align="left" width="140">
                 </el-table-column>
                 <el-table-column prop="email" label="电子邮箱"
-                                 align="left" width="180">
+                                 align="left" width="200">
                 </el-table-column>
                 <el-table-column prop="address" label="联系地址"
-                                 align="left" width="250">
+                                 align="left" width="260">
                 </el-table-column>
                 <el-table-column prop="workState" label="任职状态"
                                  align="left" width="85">
                 </el-table-column>
-                <!-- 功能列 -->
+               <!-- &lt;!&ndash; 功能列 &ndash;&gt;
                 <el-table-column fixed="right" width="100"
                                  label="操作">
                     <template slot-scope="scope">
@@ -47,7 +48,7 @@
                                    @click="handleEdit(scope.$index, scope.row,scope.name)">编辑
                         </el-button>
                     </template>
-                </el-table-column>
+                </el-table-column>-->
             </el-table>
             <!-- 分页组件 -->
             <div class="pagination">
@@ -104,9 +105,9 @@
             })
         },
         methods: {
-			handleEdit(index, row, name) {
+			/*handleEdit(index, row, name) {
                 alert("请求编辑员工的个人信息")
-            },
+            },*/
             //根据页码获取员工资料
             getPage(currentPage) {
                 this.$http.get('/staff/basicInfo',{

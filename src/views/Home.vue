@@ -48,12 +48,15 @@
                                 <el-menu-item index="4-1" @click="toGoodsDetails">商品库存</el-menu-item>
                             </el-menu-item-group>
                         </el-submenu>
-                        <el-menu-item index="5">
+                        <el-submenu index="5">
                             <template slot="title">
                                 <i class="fa fa-users" style="width: 25px"></i>
-                                <span @click="toGoodsManage">供货商管理</span>
+                                <span>供货商管理</span>
                             </template>
-                        </el-menu-item>
+                            <el-menu-item-group style="padding-left: 30px">
+                                <el-menu-item index="5-1" @click="toSupplierManage">供应商列表</el-menu-item>
+                            </el-menu-item-group>
+                        </el-submenu>
                     </el-menu>
                 </el-col>
             </el-row>
@@ -106,7 +109,7 @@
             toSellRecord() {
                 this.$router.replace('/home/sellRecord')
                 this.itemMenu = []
-                this.itemMenu = this.itemMenu.concat(['销售管理', '销售记录'])
+                this.itemMenu = this.itemMenu.concat(['销售管理', '销售历史'])
             },
             toPurchaseOrder() {
                 this.$router.replace('/home/purchaseOrder')
@@ -127,6 +130,11 @@
                 this.$router.replace('/home/staffsInfo')
                 this.itemMenu = []
                 this.itemMenu = this.itemMenu.concat(['员工管理', '基本信息'])
+            },
+            toSupplierManage(){
+                this.$router.replace('/home/proManage')
+                this.itemMenu = []
+                this.itemMenu = this.itemMenu.concat(['供应商管理','供应商列表'])
             },
             returnLogin(){
                 localStorage.removeItem('token')
@@ -181,7 +189,7 @@
 
     .btn100 {
         position: absolute;
-        bottom: 0;
+        bottom: 2px;
         right: 30px;
     }
 </style>

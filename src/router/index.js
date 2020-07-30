@@ -38,6 +38,10 @@ const routes = [
 			{
 				path:'goodsDetails',
 				component: () => import('../component/good/goodsDetails')
+			},
+			{
+				path:'proManage',
+				component: () => import('../component/proManage/proManage')
 			}
 		]
 	}

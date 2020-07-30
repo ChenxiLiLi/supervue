@@ -1,10 +1,9 @@
 <template>
     <div class="login_container">
         <div class="login_box">
-			<div class="welcomeFont">
-				<span style="font-size:26px">Logining to</span><br>
-				<span style="font-size:26px; margin-left:40px;">Supermarket System</span>
-			</div>
+            <div class="welcomeFont">
+                <span style="font-size: 24px">宜家超市系统</span>
+            </div>
             <!-- 登录表单 -->
             <el-form v-loading="loading"
                      element-loading-text="正在登录..."
@@ -101,19 +100,18 @@
 <style scoped>
     .login_container {
         background-image: url("../assets/images/login.jpg");
-        width:100%;
-        height:100%;
-        position:fixed;
-        background-size:100% 100%;
+        width: 100%;
+        height: 100%;
     }
     .login_box {
         width: 400px;
-        height: 400px;
+        height: 350px;
         background-color: #fff;
+        border-radius: 10px;
         position: absolute;
-        left: 60%;
-        top: 25%;
-        border: 10px solid rgba(100,200,200,1);
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
     }
     .login_form {
         position: absolute;
@@ -132,9 +130,9 @@
         margin-inline-start: 10px;
         padding: 12px 25px;
     }
-	.welcomeFont{
-		color: rgba(100,200,200,1);
-		margin-top: 60px;
-		margin-left: 60px;
-	}
+    .welcomeFont {
+        margin-left: 120px;
+        margin-top: 60px;
+        color: #545c64;
+    }
 </style>

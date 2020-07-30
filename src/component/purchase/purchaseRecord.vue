@@ -55,14 +55,14 @@
                             align="center"
                             min-width="100">
                     </el-table-column>
-					<el-table-column fixed="right" width="100"
+					<!--<el-table-column fixed="right" width="100"
                                  label="操作">
-                    <template slot-scope="scope">
-                        <el-button size="mini" type="success"
-                                   @click="handleEdit(scope.$index, scope.row)">编辑
-                        </el-button>
-                    </template>
-                </el-table-column>
+                        <template slot-scope="scope">
+                            <el-button size="mini" type="success"
+                                       @click="handleEdit(scope.$index, scope.row)">编辑
+                            </el-button>
+                        </template>
+                    </el-table-column>-->
                 </el-table>
             </div>
             <!-- 分页组件 -->
@@ -91,9 +91,9 @@
             }
         },
         methods: {
-			handleEdit(index, row, name) {
+			/*handleEdit(index, row, name) {
                 alert("请求编辑进货记录")
-            },
+            },*/
             //根据页码获取资料
             getPage(currentPage) {
                 this.$http.get('/purchase/allPurRecord',{
